@@ -66,7 +66,11 @@ $(function () {
     });
     var table = $('#example').DataTable({
         lengthChange: false,
-        buttons: ['copy', 'excel', 'pdf', 'colvis']
+        buttons: [
+            { extend: 'copy', className: 'btn-primary btn' },
+            { extend: 'excel', className: 'btn-success btn' },
+            { extend: 'pdf', className: 'btn-warning btn' }
+          ]
     });
 
     table.buttons().container()
@@ -74,7 +78,11 @@ $(function () {
 
     var table1 = $('#table_appointment').DataTable({
         lengthChange: false,
-        buttons: ['copy', 'excel', 'pdf', 'colvis']
+        buttons: [
+            { extend: 'copy', className: 'btn-primary btn' },
+            { extend: 'excel', className: 'btn-success btn' },
+            { extend: 'pdf', className: 'btn-warning btn' }
+          ]
     });
 
     table1.buttons().container()
@@ -395,6 +403,11 @@ function onInput(e) {
     }
 }
 
+function formatCurrency(amount) {
+    const formattedAmount = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+    return formattedAmount;
+}
+
 function autoGenerate() {
     let index = document.getElementsByTagName("tbody")[0].childElementCount;
     $('table tbody').append(`
@@ -402,7 +415,7 @@ function autoGenerate() {
       <td scope="row" class="text-center"></td>
       <td class="text-center"> <input type="text" list="drugs" data-index="${index + 1}" id="Name${index+1}" name="Name${index+1}" value="" class="form-control border-0" required form="invoiceForm" autocomplete="nonono"> </td>
       <td class="text-center"><input type="text" data-index="${index + 1}" id="Unit${index + 1}" name="Unit${index + 1}" class="form-control border-0" onkeydown="return false;" autocomplete="off" style="caret-color: transparent !important;" required form="invoiceForm"></td>
-      <td class="text-center"> <input type="number" data-index="${index + 1}" id="Quantity${index + 1}" name="Quantity${index + 1}" value=1 min=1 class="form-control border-0" required form="invoiceForm"> </td>
+      <td class="text-center"> <input type="number" data-index="${index + 1}" id="Quantity${index + 1}" name="Quantity${index + 1}" value=0 min=1 class="form-control border-0" required form="invoiceForm"> </td>
       <td class="text-center"><input type="text" class="form-control border-0" id="MaxQuantity${index+1}" onkeydown="return false;" style="caret-color: transparent !important;" autocomplete="off"></td>
       <td class="text-center"><input type="text" data-index="${index + 1}" id="Price${index + 1}" name="Price${index + 1}" class="form-control border-0" required onkeydown="return false;" style="caret-color: transparent !important;" autocomplete="off" form="invoiceForm"></td>
       <td class="text-center"><input type="text" data-index="${index + 1}" id="Total${index + 1}" name="Total${index + 1}" class="form-control border-0" required onkeydown="return false;" style="caret-color: transparent !important;" autocomplete="off" form="invoiceForm"></td>

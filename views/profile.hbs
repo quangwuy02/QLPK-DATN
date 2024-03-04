@@ -38,7 +38,7 @@
                         <h5 class="my-3">{{u.Name}}</h5>
                         <p class="text-muted mb-1">@{{u.Username}}</p>
                         <p class="text-muted mb-4">{{u.Address}}</p>
-                        <button type="button"><a data-bs-toggle="modal" data-bs-target="#editProfileModal"><i
+                        <button type="button" class="btn btn-primary"><a data-bs-toggle="modal" data-bs-target="#editProfileModal"><i
                                     class="fas fa-edit"></i></a></button>
                     </div>
                 </div>
@@ -203,14 +203,8 @@
                                         <td>{{Status}}</td>
                                     </tr>
                                     {{/each}}
-                                <tfoot>
-                                    <tr>
-                                        <th>Ngày hẹn</th>
-                                        <th>Giờ hẹn</th>
-                                        <th>Bác sĩ</th>
-                                        <th>Trạng thái</th>
-                                    </tr>
-                                </tfoot>
+                                </tbody>
+                                
                             </table>
                         </div>
                     </div>

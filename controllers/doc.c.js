@@ -53,16 +53,14 @@ exports.UpdateInvoice = async (req, res, next) => {
         user[0].DOB = typeof user[0].DOB == "object" ? user[0].DOB.toLocaleDateString('vi-VN') : "";
     }
     if (data.Patient || data.Name) {
-        const rs=await RecordsM.getMaxID();
-        if (rs.length==0) {
-            data.ID="1";
-        }
-        else {
-            var ID=parseInt(parseInt(rs[0].ID)+1);
-            data.ID=ID.toString();
-        }
+        const maxIDResult = await RecordsM.getMaxID();
+        const currentMaxID = maxIDResult.length > 0 ? parseInt(maxIDResult[0].ID) : 0;
+        const newID = (currentMaxID + 1).toString();
+        
+        data.ID = newID;
+        
         await RecordsM.add(data);
-        return res.redirect('/tai-lieu/ho-so-benh-an/'+ID);
+        return res.redirect('/tai-lieu/ho-so-benh-an/' + newID);
     }
     res.send({ user: user[0], drug: drug[0] });
 }

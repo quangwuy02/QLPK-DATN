@@ -33,12 +33,12 @@
                     <div class="col-xl-8">
                         <form class="form-inline" id="invoiceForm" action="/tai-lieu/xuat-hoa-don" method="post">
                             <div class="row g-3 align-items-center mb-auto">
-                                <div class="col-auto">
+                                <div class="flex w-25">
                                     <label for="Name">Bệnh nhân: </label>
                                 </div>
                                 <div class="col-auto">
                                     <input type="text" list="patients" id="Name" name="Name"
-                                        class="form-control mx-sm-3 border-0" value="" required>
+                                        class="form-control mx-sm-3 rounded-3 mt-2" value="" required>
                                     <input type="text" id="Username" name="Username"
                                         class="d-none" value="">
                                 </div>
@@ -49,27 +49,27 @@
                                 </datalist>
                             </div>
                             <div class="row g-3 align-items-center">
-                                <div class="col-auto">
+                                <div class="flex w-25">
                                     <label for="DOB">Ngày sinh: </label>
                                 </div>
                                 <div class="col-auto">
-                                    <input type="text" id="DOB" class="form-control mx-sm-3 border-0" value="" name="DOB" required>
+                                    <input type="text" id="DOB" class="form-control mx-sm-3 rounded-3 mt-2" value="" name="DOB" required>
                                 </div>
                             </div>
                             <div class="row g-3 align-items-center">
-                                <div class="col-auto">
+                                <div class="flex w-25">
                                     <label for="Address">Địa chỉ: </label>
                                 </div>
                                 <div class="col-auto">
-                                    <input type="text" id="Address" class="form-control mx-sm-3 border-0" value="" name="Address" required>
+                                    <input type="text" id="Address" class="form-control mx-sm-3 rounded-3 mt-2" value="" name="Address" required>
                                 </div>
                             </div>
                             <div class="row g-3 align-items-center">
-                                <div class="col-auto">
+                                <div class="flex w-25">
                                     <label for="Res">Chẩn đoán: </label>
                                 </div>
                                 <div class="col-auto">
-                                    <input type="text" id="Res" class="form-control mx-sm-3 border-0" value="" name="Diagnosis" required>
+                                    <input type="text" id="Res" class="form-control mx-sm-3 rounded-3 mt-2" value="" name="Diagnosis" required>
                                 </div>
                             </div>
                         </form>
@@ -124,7 +124,7 @@
                     </div>
                     <div class="col-xl-6">
                         <p class="text-black float-start"><span class="text-black me-3">Tổng số tiền cần thanh
-                                toán:</span><span style="font-size: 25px;"><input type="number" readonly required value="0" id="AllTotal" name="AllTotal" form="invoiceForm" class="border-0"></span></p>
+                                toán:</span><span style="font-size: 25px;"><input type="number" readonly required value="formatCurrency({{data.allTotal}})" id="AllTotal" name="AllTotal" form="invoiceForm" class="border-0"></span></p>
                     </div>
 
                 </div>
