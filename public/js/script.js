@@ -1,5 +1,27 @@
 var usernameProfile = "";
 var NamePatient = "";
+$(document).ready(function() {
+    $('#cancelBtn').click(function() {
+        $('#confirmModal').modal('show');
+    });
+    $('#cancelConfirmBtn').click(function() {
+        window.location.reload();
+    });
+    $('#confirmBtn').click(function() {
+        var appointmentId = $('.cancelBtn').data('appointment-id');
+        $.ajax({
+            url: '/huy-phieu-hen/:' + appointmentId + '',
+            type: 'POST',
+            success: function(response) {
+                console.log(response.message);
+                window.location.reload();
+            },
+            error: function(xhr, status, error) {
+                console.error('Có lỗi xảy ra:', error);
+            }
+        });
+    });
+});
 $(function () {
     $("#name").on('input', function () {
         var ok = checkUpperCase($(this).val());
@@ -403,9 +425,8 @@ function onInput(e) {
     }
 }
 
-function formatCurrency(amount) {
-    const formattedAmount = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
-    return formattedAmount;
+function formatCurrency(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 function autoGenerate() {
@@ -595,8 +616,14 @@ function savePatientsList() {
         x.Gender = $('#Gender' + i).val();
         x.DOB = $('#DOB' + i).val();
         x.Time = $('#Time' + i).val();
+
+        if (!x.Username || !x.Name || !x.Address || !x.Gender || !x.DOB || !x.Time) {
+            alert('Hãy điền đẩy đủ thông tin ' + i);
+            return;
+        }
         PatientsList.push(x);
     }
+
     console.log(PatientsList);
     $.post("/tai-lieu/danh-sach-kham-benh",
         {

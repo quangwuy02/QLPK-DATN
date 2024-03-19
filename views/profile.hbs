@@ -123,7 +123,7 @@
                                         <input type="password" id="password" class="form-control"
                                             value="{{user.Password}}" name="Password" required />
                                         <label class="form-label" for="password">Mật khẩu mới</label>
-                                    </div>
+                                    </div>  
                                     {{!-- Confirm password input --}}
                                     <div class="form-floating mt-4 mb-4">
                                         <input type="password" id="retype_password" class="form-control" name="Retype"
@@ -131,7 +131,7 @@
                                         <label class="form-label" for="retype_password">Xác nhận mật khẩu mới</label>
                                     </div>
                                     {{!-- Button submit --}}
-                                    <button type="submit" class="btn btn-success">Xác nhận</button>
+                                    <button type="submit" class="btn btn-success" id="confirmationModal">Xác nhận</button>
                                 </form>
                             </div>
                         </div>
@@ -192,6 +192,7 @@
                                         <th>Giờ hẹn</th>
                                         <th>Bác sĩ</th>
                                         <th>Trạng thái</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -201,10 +202,14 @@
                                         <td>{{Time}}</td>
                                         <td><a href="/bac-si/{{ID}}-{{Doctor}}">{{Doctor}}</a></td>
                                         <td>{{Status}}</td>
+                                        <td>
+                                            {{#ifEquals Status "Đang chờ"}}
+                                                <button type="submit" class="btn btn-danger" id="cancelBtn" data-target="#confirmModal" data-appointment-id="{{id}}">Hủy</button>
+                                            {{/ifEquals}}
+                                        </td>
                                     </tr>
                                     {{/each}}
                                 </tbody>
-                                
                             </table>
                         </div>
                     </div>
@@ -213,7 +218,6 @@
         </div>
     </div>
 </section>
-
 
 <!-- Modal -->
 <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModal" aria-hidden="true">
@@ -294,4 +298,22 @@
             </div>
         </div>
     </div>
+</div>
+{{!-- confrim Modal --}}
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Xác nhận hủy cuộc hẹn</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có chắc chắn muốn hủy cuộc hẹn này không?</p>
+      </div>
+      <div class="modal-footer">
+        <button id="cancelConfirmBtn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+        <button id="confirmBtn" type="button" class="btn btn-danger">Xác nhận</button>
+      </div>
+    </div>
+  </div>
 </div>

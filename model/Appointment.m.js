@@ -36,5 +36,16 @@ module.exports = {
     changeStatus: async(ID, Status)=>{
         const rs=await db.collection('Appointments').updateOne({_id:new ObjectID(ID)},{$set:{Status:Status}});
         return rs;
-    }
+    },
+    cancelAppointment: async (ID) => {
+        const rs = await db.collection('Appointments').deleteOne({ _id: new ObjectID(ID) });
+        return rs;
+    },
+    updateStatus: async (appointmentId, newStatus) => {
+        const rs = await db.collection('Appointments').updateOne(
+            { _id: new ObjectID(appointmentId) },
+            { $set: { Status: newStatus } }
+        );
+        return rs;
+    },
 }

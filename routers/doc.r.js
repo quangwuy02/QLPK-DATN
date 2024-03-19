@@ -3,6 +3,7 @@ const router=app.Router();
 const docC=require('../controllers/doc.c');
 router.get('/xuat-hoa-don',docC.createInvoice);
 router.post('/xuat-hoa-don', docC.UpdateInvoice);
+router.post('/huy-phieu-hen/:ID', docC.cancelAppointment);
 router.get('/lap-phieu-hen',docC.getAppointment);
 router.post('/lap-phieu-hen',docC.postAppointment);
 router.post('/trang-thai-phieu-hen',docC.changeStatus);

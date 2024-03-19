@@ -1,5 +1,63 @@
 <div class="container">
 <h3 class="text-center mt-2"><b>DANH MỤC THUỐC</b></h3>
+{{#ifEquals role "doctor"}}
+<button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addDrugModal">
+        Thêm mới thuốc
+</button>
+{{/ifEquals}}
+<div class="modal fade" id="addDrugModal" tabindex="-1" aria-labelledby="addDrugModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thêm mới thuốc</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="px-md-2" id="addDrugForm" action="/thuoc/them-thuoc" method="POST">
+                    {{!-- New drug name input --}}
+                    <div class="form-floating mb-4">
+                        <input type="text" id="newName" class="form-control" name="newName" required />
+                        <label class="form-label" for="newName">Tên thuốc</label>
+                    </div>
+
+                    {{!-- New unit input --}}
+                    <div class="form-floating mb-4">
+                        <input type="text" id="newUnit" class="form-control" name="newUnit" required />
+                        <label class="form-label" for="newUnit">Đơn vị tính</label>
+                    </div>
+
+                    {{!-- New unit price input --}}
+                    <div class="form-floating mb-4">
+                        <input type="number" id="newPrice" min="0" class="form-control" name="newPrice" required />
+                        <label class="form-label" for="newPrice">Đơn giá</label>
+                    </div>
+
+                    {{!-- New quantity input --}}
+                    <div class="form-floating mb-4">
+                        <input type="number" id="newQuantity" min="0" class="form-control" name="newQuantity" required />
+                        <label class="form-label" for="newQuantity">Số lượng</label>
+                    </div>
+
+                    {{!-- New active substance input --}}
+                    <div class="form-floating mb-4">
+                        <input type="text" id="newChemicals" class="form-control" name="newChemicals" required />
+                        <label class="form-label" for="newChemicals">Hoạt chất</label>
+                    </div>
+
+                    {{!-- New uses input --}}
+                    <div class="form-floating mb-4">
+                        <input type="text" id="newUses" class="form-control" name="newUses" required />
+                        <label class="form-label" for="newUses">Công dụng chính</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="submit" class="btn btn-primary" form="addDrugForm">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
 <table id="example" class="table table-striped" style="width:100%;background-color: aliceblue;">
         <thead>
             <tr>
