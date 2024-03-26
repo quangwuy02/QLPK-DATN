@@ -1,28 +1,36 @@
 var usernameProfile = "";
 var NamePatient = "";
-$(document).ready(function() {
-    $('#cancelBtn').click(function() {
-        $('#confirmModal').modal('show');
+// $(document).ready(function() {
+    
+// });
+
+$(function () {
+    // $(document).ready(function(){
+    //     $('.datepicker').datepicker({
+    //         format: 'dd/mm/yyyy', // Định dạng ngày tháng năm
+    //         autoclose: true, // Tự đóng khi chọn xong
+    //         todayHighlight: true // Làm nổi bật ngày hiện tại
+    //     });
+    // });
+    $('.cancelBtn').click(function() {
+        var appointmentId = $(this).data('appointment-id');
+        $('.confirmBtn').data('appointment-id', appointmentId);
+        $('.confirmModal').modal('show');
     });
-    $('#cancelConfirmBtn').click(function() {
-        window.location.reload();
-    });
-    $('#confirmBtn').click(function() {
-        var appointmentId = $('.cancelBtn').data('appointment-id');
-        $.ajax({
-            url: '/huy-phieu-hen/:' + appointmentId + '',
-            type: 'POST',
-            success: function(response) {
-                console.log(response.message);
-                window.location.reload();
-            },
-            error: function(xhr, status, error) {
-                console.error('Có lỗi xảy ra:', error);
-            }
+    $('.confirmBtn').click(function() {
+        var appointmentId = $(this).data('appointment-id');
+        $.post("/tai-khoan/huy-cuoc-hen", { appointmentId: appointmentId })
+        .done(function(response) {
+            $('.confirmModal').modal('hide');
+        })
+        .fail(function(xhr, status, error) {
+            console.error(xhr.responseText);
+            $('.confirmModal').modal('hide');
         });
     });
-});
-$(function () {
+    $('.cancelConfirmBtn').click(function() {
+        $('.confirmModal').modal('hide');
+    });
     $("#name").on('input', function () {
         var ok = checkUpperCase($(this).val());
         if (ok == 1) {
@@ -87,6 +95,7 @@ $(function () {
         }
     });
     var table = $('#example').DataTable({
+        pageLength: 10,
         lengthChange: false,
         buttons: [
             { extend: 'copy', className: 'btn-primary btn' },
@@ -199,6 +208,16 @@ $(function () {
             $("#changePasswordForm").addClass("d-none");
         }
     });
+    // $('.cancelAppointment').on('cancel', function () {
+    //     $.post("/huy-cuoc-hen/:" + ID + "",
+    //         {
+    //             ID: $(this).attr('id'),
+    //             Status: $(this).val()
+    //         },
+    //         function (data, status) {
+    //             console.log(data);
+    //         });
+    // })
     $('.changeStatus').on('change', function () {
         $.post("/tai-lieu/trang-thai-phieu-hen",
             {
@@ -630,6 +649,7 @@ function savePatientsList() {
             PatientsList: PatientsList
         },
         function (data, status) {
+            $('.successModal').modal('show');
         });
 }
 
@@ -671,4 +691,22 @@ function autoGenerate1() {
         $(this).attr('value', val);
         $(this).attr('width', val.length + 1);
     });
+}
+
+function formatMoney(val) {
+    if (val) {
+        if (typeof val === 'string') {
+            let num = val.trim().replace(/\,([0-9]{3})/g, '$1');
+            num = val.trim().replace(/\,/g, '');
+            const NUMBER_REGEX = /^([0-9]*)$/g;
+            if (NUMBER_REGEX.test(num)) {
+                return parseFloat(num).toLocaleString('en-US');
+            }
+            return val;
+        } else {
+            const num = val.toString().replace(/\,/g, '');
+            return parseFloat(num) ? parseFloat(num).toLocaleString('en-US') : val;
+        }
+    }
+    return 0;
 }

@@ -105,10 +105,10 @@
                                     {{Quantity}}
                                 </td>
                                 <td>
-                                    {{Price}}
+                                    <script>document.write(formatMoney({{ Price }} ))</script>
                                 </td>
                                 <td>
-                                    {{Total}}
+                                    <script>document.write(formatMoney({{ Total }} ))</script>
                                 </td>
                             </tr>
                             {{/each}}

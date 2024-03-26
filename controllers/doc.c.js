@@ -96,33 +96,7 @@ exports.postAppointment=async (req,res,next)=>{
     } catch (err) {
         next(err);
     }
-} 
-
-exports.cancelAppointment = async (req, res, next) => {
-    try {
-        const patient=await UsersM.getAll();
-        let role = "doctor";
-        if (req.session.User) {
-            role = "patient";
-        }
-        if (req.session.User) {
-            res.render('./pages/error', { display1: "d-none", display2: "d-block", role: role });
-        }
-    
-        const appointmentId = req.params.id;
-        const existingAppointment = await AppointmentM.getById(appointmentId);
-        if (!existingAppointment) {
-            return res.status(404).json({ message: 'Không tìm thấy cuộc hẹn!!!' });
-        }
-        if (existingAppointment.Status !== 'Đang chờ') {
-            return res.status(400).json({ message: 'Cuộc hẹn không thể hủy. Hãy liên hệ với bác sĩ.' });
-        }
-        await AppointmentM.updateStatus(appointmentId, 'Hủy');
-        return res.json({ message: 'Cuộc hẹn đã được hủy' });
-    } catch (err) {
-        next(err);
-    }
-};
+}
 
 exports.changeStatus=async(req,res,next)=>{
     try {

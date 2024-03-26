@@ -32,7 +32,7 @@
             <tr>
                 <td>{{ID}}</td>
                 <td>{{ServiceName}}</td>
-                <td>{{Price}}</td>
+                <td><script>document.write(formatMoney({{ Price }} ))</script></td>
                 {{#ifEquals ../role "doctor"}}
                 <td>
                     <div class="d-flex">

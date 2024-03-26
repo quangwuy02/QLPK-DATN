@@ -133,3 +133,27 @@ exports.postProfile = async (req, res, next) => {
         next(err);
     }
 }
+
+exports.cancelAppointment = async (req, res, next) => {
+    try {
+        // let role = "doctor";
+        // if (req.session.U) {
+        //     role = "patient";
+        // }
+        // if (!req.session.user) {
+        //     return res.render('./pages/error', { display1: "d-none", display2: "d-block", role: role });
+        // }
+        const appointmentId = req.body;
+
+        const cancellationResult = await AppointmentModel.cancelAppointment(appointmentId);
+
+        if (!cancellationResult) {
+            return res.status(404).json({ message: 'Không tìm thấy cuộc hẹn để hủy.' });
+        }
+
+        return res.json({ message: 'Cuộc hẹn đã được hủy thành công.' });
+        
+    } catch (err) {
+        next(err);
+    }
+};

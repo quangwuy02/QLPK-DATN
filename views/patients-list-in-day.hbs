@@ -21,8 +21,7 @@
                         id="Name{{sum @index 1}}" name="Name" class="form-control mx-sm-3 border-0" value="{{Name}}"> </td>
                 <td class="col-1 text-center"><input type="text" id="Gender{{sum @index 1}}" data-index="{{sum @index 1}}"
                         class="form-control mx-sm-3 border-0" value="{{Gender}}"></td>
-                <td class="col-2 text-center"><input type="text" id="DOB{{sum @index 1}}" data-index="{{sum @index 1}}" id="DOB"
-                        class="form-control mx-sm-3 border-0" value="{{DOB}}"></td>
+                <td class="col-2 text-center"><input type="text" id="DOB{{sum @index 1}}" data-index="{{sum @index 1}}" class="form-control mx-sm-3 border-0 datepicker" value="{{DOB}}"></td>
                 <td class="col-4 text-center"> <input type="text" id="Address{{sum @index 1}}" data-index="{{sum @index 1}}"
                         class="form-control mx-sm-3 border-0" value="{{Address}}"> </td>
                 <td class="col-1 text-center"><input type="time" id="Time{{sum @index 1}}" data-index="{{sum @index 1}}"
@@ -48,3 +47,20 @@
     <div class="d-block"><button class="button success" onclick="savePatientsList()">Lưu</button></div>
     <p>Danh sách sẽ được làm mới vào 00:00 mỗi ngày</p>
 </div>
+{{!-- <div class="modal fade successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Thông báo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Lưu thành công!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div> --}}
+
