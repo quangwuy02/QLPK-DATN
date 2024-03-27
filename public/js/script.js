@@ -21,12 +21,16 @@ $(function () {
         var appointmentId = $(this).data('appointment-id');
         $.post("/tai-khoan/huy-cuoc-hen", { appointmentId: appointmentId })
         .done(function(response) {
-            $('.confirmModal').modal('hide');
+            $('.successMessage').text(response.message);
+            $('.successModal').modal('show');
         })
         .fail(function(xhr, status, error) {
             console.error(xhr.responseText);
             $('.confirmModal').modal('hide');
         });
+    });
+    $('.reloadButton').click(function() {
+        location.reload();
     });
     $('.cancelConfirmBtn').click(function() {
         $('.confirmModal').modal('hide');

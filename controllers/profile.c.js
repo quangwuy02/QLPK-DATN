@@ -143,15 +143,15 @@ exports.cancelAppointment = async (req, res, next) => {
         // if (!req.session.user) {
         //     return res.render('./pages/error', { display1: "d-none", display2: "d-block", role: role });
         // }
-        const appointmentId = req.body;
+        const appointmentId = req.body.appointmentId;
 
-        const cancellationResult = await AppointmentModel.cancelAppointment(appointmentId);
+        const cancellationResult = await AppointmentM.cancelAppointment(appointmentId);
 
         if (!cancellationResult) {
             return res.status(404).json({ message: 'Không tìm thấy cuộc hẹn để hủy.' });
+        } else {
+            return res.json({ message: 'Cuộc hẹn đã được hủy thành công.' });
         }
-
-        return res.json({ message: 'Cuộc hẹn đã được hủy thành công.' });
         
     } catch (err) {
         next(err);

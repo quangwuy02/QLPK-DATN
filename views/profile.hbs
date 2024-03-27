@@ -205,7 +205,7 @@
                                         <td>{{Status}}</td>
                                         <td>
                                             {{#ifEquals Status "Đang chờ"}}
-                                                <button type="submit" class="btn btn-danger cancelBtn" data-target="#confirmModal" data-appointment-id="{{ID}}" data-status="{{Status}}">Hủy</button>
+                                                <button type="submit" class="btn btn-danger cancelBtn" data-target="#confirmModal" data-appointment-id="{{_id}}" data-status="{{Status}}">Hủy</button>
                                             {{/ifEquals}}
                                         </td>
                                     </tr>
@@ -318,5 +318,25 @@
         </div>
     </div>
 </div>
+{{!-- Modal --}}
+<div class="modal fade successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="successModalLabel">Thông báo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="successMessage"></p>
+      </div>
+      <div class="modal-footer">
+            <button type="button" class="btn btn-primary reloadButton">OK</button>
+      </div>  
+    </div>
+  </div>
+</div>
+
 
 
