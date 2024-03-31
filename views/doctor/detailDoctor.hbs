@@ -127,7 +127,12 @@
                                             <option value="Hủy">Hủy</option>
                                             {{/ifEquals}}
                                             {{#ifEquals Status "Đang chờ"}}
+                                            <option value="Liên hệ">Liên hệ</option>
                                             <option value="Chấp nhận">Chấp nhận</option>
+                                            <option value="Hủy">Hủy</option>
+                                            {{/ifEquals}}
+                                            {{#ifEquals Status "Liên hệ"}}
+                                            <option value="Chấp nhận">Chấp nhận</option>
                                             <option value="Hủy">Hủy</option>
                                             {{/ifEquals}}
                                         </select>

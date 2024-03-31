@@ -91,6 +91,15 @@ exports.postAppointment=async (req,res,next)=>{
         req.body.Doctor=JSON.parse(req.body.Doctor);
         req.body.Status="Đang chờ";
         req.body.Date=new Date(req.body.Date);
+
+        // const doctorUsername = req.body.Doctor.Username;
+        // const appointmentDate = req.body.Date;
+        // const existingAppointments = await AppointmentM.getAppointmentsByDoctorAndDate(doctorUsername, appointmentDate);
+
+        // if (existingAppointments.length > 0) {
+        //     return res.status(400).json({ message: 'Bác sĩ đã có cuộc hẹn vào thời gian này.' });
+        // }
+
         await AppointmentM.add(req.body);
         res.redirect('/');
     } catch (err) {

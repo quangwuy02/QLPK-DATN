@@ -24,30 +24,35 @@ exports.getEditDrugService=async(req,res,next)=>{
     }
 }
 
-exports.postAddDrug = async (req, res, next) => {
-    let role = "patient";
-    if (req.session.Doctor) {
-        role = "doctor";
-    }
-    if (!req.session.Doctor) {
-        if (req.session.Username) {
-            return res.render('./pages/error', { display1: "d-none", display2: "d-block", role: role });
-        }
-        else {
-            return res.render('./pages/error', { display1: "d-block", display2: "d-none", role: role });
-        }
-    }
-    try {
-      const data = req.body;
-      data.Price = parseInt(data.Price);
-      data.Quantity = parseInt(data.Quantity);
-      await DrugsM.create(data);
-      return res.render('detailDrug', { data: rs[0], display1: "d-none", display2: "d-block", role: role, info:"add" });
-    } catch (err) {
-      next(err);
-    }
-  };
-
+// exports.postAddDrug = async (req, res, next) => {
+//     let role = "patient";
+//     if (req.session.Doctor) {
+//         role = "doctor";
+//     }
+//     if (!req.session.Doctor) {
+//         if (req.session.Username) {
+//             return res.render('./pages/error', { display1: "d-none", display2: "d-block", role: role });
+//         }
+//         else {
+//             return res.render('./pages/error', { display1: "d-block", display2: "d-none", role: role });
+//         }
+//     }
+//     try {
+//       const data = req.body;
+//       await DrugsM.create({
+//         Name: data.Name,
+//         Chemicals: data.Chemicals,
+//         Unit: data.Unit,
+//         Uses: data.Uses,
+//         Price: data.Price,
+//         Quantity: data.Quantity
+//     });
+//       const rs = await DrugsM.getByID(ID);    
+//       return res.render('./drug/search-drug', { data: rs[0], display1: "d-none", display2: "d-block", role: role, info:"add" });
+//     } catch (err) {
+//       next(err);
+//     }
+// }
 exports.postEditDrug=async(req,res,next)=>{
     let role = "patient";
     if (req.session.Doctor) {
@@ -79,7 +84,7 @@ exports.postEditDrug=async(req,res,next)=>{
         }
         rs[0].href = 'https://www.google.com/search?tbm=isch&q=' + rs[0].Name;
         rs[0].shop = 'https://www.google.com/search?tbm=shop&q=' + rs[0].Name;
-        return res.render('detailDrug', { data: rs[0], display1: "d-none", display2: "d-block", role: role, info:"edit" });
+        return res.render('./drug/detailDrug', { data: rs[0], display1: "d-none", display2: "d-block", role: role, info:"edit" });
 
     } catch (err) {
         next(err);

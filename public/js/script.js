@@ -1,10 +1,27 @@
 var usernameProfile = "";
 var NamePatient = "";
-// $(document).ready(function() {
-    
-// });
 
 $(function () {
+    // $('#addDrugForm').submit(function(e){
+    //     e.preventDefault();
+    //     var formData = $(this).serialize();
+    //     // Gửi yêu cầu Ajax đến máy chủ
+    //     $.ajax({
+    //         url: '/them-moi/thuoc',
+    //         method: 'POST',
+    //         data: formData,
+    //         success: function(response){
+    //             console.log(response);
+    //             alert(response.successMessage);
+    //             // window.location.href = '/tim-kiem/thuoc';
+    //         },
+    //         error: function(err){
+    //             console.error(err);
+    //             alert('Đã xảy ra lỗi khi thêm mới thuốc!');
+    //         }
+    //     });
+    // });
+
     // $(document).ready(function(){
     //     $('.datepicker').datepicker({
     //         format: 'dd/mm/yyyy', // Định dạng ngày tháng năm

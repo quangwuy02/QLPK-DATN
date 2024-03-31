@@ -1,5 +1,8 @@
 const {db}=require('../model/Database.m');
 module.exports = {
+    create: async () => {
+        await db.collection('Services').insertOne(data);
+    },
     getAll: async () => {
         const rs=await db.collection('Services').find({}).toArray();
         return rs;
