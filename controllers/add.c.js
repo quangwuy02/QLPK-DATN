@@ -6,15 +6,15 @@ const ServicesM = require("../model/Services.m");
 exports.postAddDrug = async (req, res, next) => {
   let role = "patient";
   if (req.session.Doctor) {
-      role = "doctor";
+    role = "doctor";
   }
   if (!req.session.Doctor) {
-      if (req.session.Username) {
-          return res.render('./pages/error', { display1: "d-none", display2: "d-block", role: role });
-      }
-      else {
-          return res.render('./pages/error', { display1: "d-block", display2: "d-none", role: role });
-      }
+    if (req.session.Username) {
+      return res.render('./pages/error', { display1: "d-none", display2: "d-block", role: role });
+    }
+    else {
+      return res.render('./pages/error', { display1: "d-block", display2: "d-none", role: role });
+    }
   }
   try {
     const data = req.body;
@@ -26,33 +26,40 @@ exports.postAddDrug = async (req, res, next) => {
       Price: data.Price,
       Quantity: data.Quantity
     });
-    const newDrug = await DrugsM.getByName(data.Name);
-    const successMessage = "Thuốc đã được thêm mới thành công!";
-    return res.render('./drug/search-drug', { data: newDrug, display1: "d-none", display2: "d-block", role: role, info:"add", successMessage: successMessage });
+    const rs = await DrugsM.getByID(ID);
+    if (rs.length == 0) {
+      if (req.session.Username) {
+        return res.render('.pages/page-not-found', { display1: "d-none", display2: "d-block", role: role });
+      }
+      else {
+        return res.render('.pages/page-not-found', { display1: "d-block", display2: "d-none", role: role });
+      }
+    }
+    // const newData = await DrugsM.getAll();
+    res.render('./drug/search-drug', { data: newData, display1: "d-none", display2: "d-block", role: role, info: "add" });
   } catch (err) {
-    const errorMessage = "Đã xảy ra lỗi khi thêm mới thuốc!";
-    next(errorMessage);
+    next(err);
   }
 }
 
 exports.postAddService = async (req, res, next) => {
   let role = "patient";
   if (req.session.Doctor) {
-      role = "doctor";
+    role = "doctor";
   }
   if (!req.session.Doctor) {
-      if (req.session.Username) {
-          return res.render('./pages/error', { display1: "d-none", display2: "d-block", role: role });
-      } else {
-          return res.render('./pages/error', { display1: "d-block", display2: "d-none", role: role });
-      }
+    if (req.session.Username) {
+      return res.render('./pages/error', { display1: "d-none", display2: "d-block", role: role });
+    } else {
+      return res.render('./pages/error', { display1: "d-block", display2: "d-none", role: role });
+    }
   }
   try {
-      var data = req.body;
-      await ServicesM.create(data);
-      req.session.info = "add";
-      res.redirect('/tim-kiem/dich-vu');
+    var data = req.body;
+    await ServicesM.create(data);
+    req.session.info = "add";
+    res.redirect('/tim-kiem/dich-vu');
   } catch (err) {
-      next(err);
+    next(err);
   }
 };

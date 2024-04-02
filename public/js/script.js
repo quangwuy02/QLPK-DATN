@@ -2,26 +2,6 @@ var usernameProfile = "";
 var NamePatient = "";
 
 $(function () {
-    // $('#addDrugForm').submit(function(e){
-    //     e.preventDefault();
-    //     var formData = $(this).serialize();
-    //     // Gửi yêu cầu Ajax đến máy chủ
-    //     $.ajax({
-    //         url: '/them-moi/thuoc',
-    //         method: 'POST',
-    //         data: formData,
-    //         success: function(response){
-    //             console.log(response);
-    //             alert(response.successMessage);
-    //             // window.location.href = '/tim-kiem/thuoc';
-    //         },
-    //         error: function(err){
-    //             console.error(err);
-    //             alert('Đã xảy ra lỗi khi thêm mới thuốc!');
-    //         }
-    //     });
-    // });
-
     // $(document).ready(function(){
     //     $('.datepicker').datepicker({
     //         format: 'dd/mm/yyyy', // Định dạng ngày tháng năm
@@ -29,27 +9,27 @@ $(function () {
     //         todayHighlight: true // Làm nổi bật ngày hiện tại
     //     });
     // });
-    $('.cancelBtn').click(function() {
+    $('.cancelBtn').click(function () {
         var appointmentId = $(this).data('appointment-id');
         $('.confirmBtn').data('appointment-id', appointmentId);
         $('.confirmModal').modal('show');
     });
-    $('.confirmBtn').click(function() {
+    $('.confirmBtn').click(function () {
         var appointmentId = $(this).data('appointment-id');
         $.post("/tai-khoan/huy-cuoc-hen", { appointmentId: appointmentId })
-        .done(function(response) {
-            $('.successMessage').text(response.message);
-            $('.successModal').modal('show');
-        })
-        .fail(function(xhr, status, error) {
-            console.error(xhr.responseText);
-            $('.confirmModal').modal('hide');
-        });
+            .done(function (response) {
+                $('.successMessage').text(response.message);
+                $('.successModal').modal('show');
+            })
+            .fail(function (xhr, status, error) {
+                console.error(xhr.responseText);
+                $('.confirmModal').modal('hide');
+            });
     });
-    $('.reloadButton').click(function() {
+    $('.reloadButton').click(function () {
         location.reload();
     });
-    $('.cancelConfirmBtn').click(function() {
+    $('.cancelConfirmBtn').click(function () {
         $('.confirmModal').modal('hide');
     });
     $("#name").on('input', function () {
@@ -122,7 +102,7 @@ $(function () {
             { extend: 'copy', className: 'btn-primary btn' },
             { extend: 'excel', className: 'btn-success btn' },
             { extend: 'pdf', className: 'btn-warning btn' }
-          ]
+        ]
     });
 
     table.buttons().container()
@@ -134,7 +114,7 @@ $(function () {
             { extend: 'copy', className: 'btn-primary btn' },
             { extend: 'excel', className: 'btn-success btn' },
             { extend: 'pdf', className: 'btn-warning btn' }
-          ]
+        ]
     });
 
     table1.buttons().container()
@@ -306,12 +286,12 @@ $(function () {
         $("#saveSchedule").addClass("d-block");
         $("#editSchedule").removeClass("d-block");
         $("#editSchedule").addClass("d-none");
-        $('.schedule-cell').click(function(){
+        $('.schedule-cell').click(function () {
             console.log('cell click');
-            let items=["accent-pink-gradient","accent-orange-gradient","accent-green-gradient","accent-cyan-gradient","accent-blue-gradient","accent-purple-gradient"];
-            let item = items[Math.floor(Math.random()*items.length)];
-            if ($(this).html()=="") {
-                $(this).html("<div class='"+item+"'></div>");
+            let items = ["accent-pink-gradient", "accent-orange-gradient", "accent-green-gradient", "accent-cyan-gradient", "accent-blue-gradient", "accent-purple-gradient"];
+            let item = items[Math.floor(Math.random() * items.length)];
+            if ($(this).html() == "") {
+                $(this).html("<div class='" + item + "'></div>");
             }
             else {
                 $(this).html("");
@@ -332,57 +312,57 @@ $(function () {
         $("#saveSchedule").removeClass("d-block");
         $("#saveSchedule").addClass("d-none");
     });
-    $('table').on('click', 'button', function(e){
-        let nRows=parseInt(document.getElementsByTagName("tbody")[0].childElementCount);
-        let removeIndex=parseInt($(this).closest('tr').index())+1;
-        console.log('remove',removeIndex);
-        let subtract=parseInt($("#Total"+removeIndex).val());
+    $('table').on('click', 'button', function (e) {
+        let nRows = parseInt(document.getElementsByTagName("tbody")[0].childElementCount);
+        let removeIndex = parseInt($(this).closest('tr').index()) + 1;
+        console.log('remove', removeIndex);
+        let subtract = parseInt($("#Total" + removeIndex).val());
         if (!isNaN(subtract)) {
-            $("#AllTotal").val(parseInt($("#AllTotal").val())-subtract);
+            $("#AllTotal").val(parseInt($("#AllTotal").val()) - subtract);
         }
         $(this).closest('tr').remove();
-        for (let i=removeIndex+1;i<=nRows;i++) {
-            let j=i-1;
+        for (let i = removeIndex + 1; i <= nRows; i++) {
+            let j = i - 1;
 
-            $("#Name"+i).attr("name", "Name"+j);
-            $("#Username"+i).attr("name", "Username"+j);
-            $("#Unit"+i).attr("name", "Unit"+j);
-            $("#Quantity"+i).attr("name", "Quantity"+j);
-            $("#Used"+i).attr("name", "Used"+j);
-            $("#Gender"+i).attr("name", "Gender"+j);
-            $("#DOB"+i).attr("name", "DOB"+j);
-            $("#Address"+i).attr("name", "Address"+j);
-            $("#Time"+i).attr("name", "Time"+j);
-            $("#Price"+i).attr("name", "Price"+j);
-            $("#Total"+i).attr("name", "Total"+j);
+            $("#Name" + i).attr("name", "Name" + j);
+            $("#Username" + i).attr("name", "Username" + j);
+            $("#Unit" + i).attr("name", "Unit" + j);
+            $("#Quantity" + i).attr("name", "Quantity" + j);
+            $("#Used" + i).attr("name", "Used" + j);
+            $("#Gender" + i).attr("name", "Gender" + j);
+            $("#DOB" + i).attr("name", "DOB" + j);
+            $("#Address" + i).attr("name", "Address" + j);
+            $("#Time" + i).attr("name", "Time" + j);
+            $("#Price" + i).attr("name", "Price" + j);
+            $("#Total" + i).attr("name", "Total" + j);
 
-            $("#Name"+i).attr("id", "Name"+j);
-            $("#Username"+i).attr("id", "Username"+j);
-            $("#Unit"+i).attr("id", "Unit"+j);
-            $("#Quantity"+i).attr("id", "Quantity"+j);
-            $("#Used"+i).attr("id", "Used"+j);
-            $("#Gender"+i).attr("id", "Gender"+j);
-            $("#DOB"+i).attr("id", "DOB"+j);
-            $("#Address"+i).attr("id", "Address"+j);
-            $("#Time"+i).attr("id", "Time"+j);
-            $("#Price"+i).attr("id", "Price"+j);
-            $("#Total"+i).attr("id", "Total"+j);
+            $("#Name" + i).attr("id", "Name" + j);
+            $("#Username" + i).attr("id", "Username" + j);
+            $("#Unit" + i).attr("id", "Unit" + j);
+            $("#Quantity" + i).attr("id", "Quantity" + j);
+            $("#Used" + i).attr("id", "Used" + j);
+            $("#Gender" + i).attr("id", "Gender" + j);
+            $("#DOB" + i).attr("id", "DOB" + j);
+            $("#Address" + i).attr("id", "Address" + j);
+            $("#Time" + i).attr("id", "Time" + j);
+            $("#Price" + i).attr("id", "Price" + j);
+            $("#Total" + i).attr("id", "Total" + j);
         }
-     });
-     $('#invoiceForm').submit(function(event){
-        let nRows=parseInt(document.getElementsByTagName("tbody")[0].childElementCount);
-        if (nRows<=0) {
+    });
+    $('#invoiceForm').submit(function (event) {
+        let nRows = parseInt(document.getElementsByTagName("tbody")[0].childElementCount);
+        if (nRows <= 0) {
             event.preventDefault();
             alert("Cần thêm ít nhất 1 loại thuốc/dịch vụ!");
         }
-     });
-     $('#drug-report').submit(function(event){
-        let nRows=parseInt(document.getElementsByTagName("tbody")[0].childElementCount);
-        if (nRows<=0) {
+    });
+    $('#drug-report').submit(function (event) {
+        let nRows = parseInt(document.getElementsByTagName("tbody")[0].childElementCount);
+        if (nRows <= 0) {
             event.preventDefault();
             alert("Cần thêm ít nhất 1 loại thuốc");
         }
-     });
+    });
 })
 
 function checkUpperCase(name) {
@@ -474,10 +454,10 @@ function autoGenerate() {
     $('table tbody').append(`
     <tr>
       <td scope="row" class="text-center"></td>
-      <td class="text-center"> <input type="text" list="drugs" data-index="${index + 1}" id="Name${index+1}" name="Name${index+1}" value="" class="form-control border-0" required form="invoiceForm" autocomplete="nonono"> </td>
+      <td class="text-center"> <input type="text" list="drugs" data-index="${index + 1}" id="Name${index + 1}" name="Name${index + 1}" value="" class="form-control border-0" required form="invoiceForm" autocomplete="nonono"> </td>
       <td class="text-center"><input type="text" data-index="${index + 1}" id="Unit${index + 1}" name="Unit${index + 1}" class="form-control border-0" onkeydown="return false;" autocomplete="off" style="caret-color: transparent !important;" required form="invoiceForm"></td>
       <td class="text-center"> <input type="number" data-index="${index + 1}" id="Quantity${index + 1}" name="Quantity${index + 1}" value=0 min=1 class="form-control border-0" required form="invoiceForm"> </td>
-      <td class="text-center"><input type="text" class="form-control border-0" id="MaxQuantity${index+1}" onkeydown="return false;" style="caret-color: transparent !important;" autocomplete="off"></td>
+      <td class="text-center"><input type="text" class="form-control border-0" id="MaxQuantity${index + 1}" onkeydown="return false;" style="caret-color: transparent !important;" autocomplete="off"></td>
       <td class="text-center"><input type="text" data-index="${index + 1}" id="Price${index + 1}" name="Price${index + 1}" class="form-control border-0" required onkeydown="return false;" style="caret-color: transparent !important;" autocomplete="off" form="invoiceForm"></td>
       <td class="text-center"><input type="text" data-index="${index + 1}" id="Total${index + 1}" name="Total${index + 1}" class="form-control border-0" required onkeydown="return false;" style="caret-color: transparent !important;" autocomplete="off" form="invoiceForm"></td>
       <td class="text-center"> <button class="btn btn-light rounded-circle"><i class="bi bi-x"></i></button> </td>
@@ -508,33 +488,33 @@ function onInput1(e) {
 
     console.log('index', input.getAttribute("data-index"));
     var index = input.getAttribute("data-index");
-    var ok=false;
+    var ok = false;
 
     for (var i = 0; i < options.length; i++) {
         if (options[i].innerText === val) {
-            ok=true;
-                    var Unit=options[i].getAttribute("data-unit");
-                    var Price=options[i].getAttribute("data-price");
-                    var MaxQuantity=options[i].getAttribute("data-quantity");
-                    $('#MaxQuantity'+index).val(MaxQuantity);
-                    $('#Quantity'+index).attr({
-                        "max" : MaxQuantity,
-                        "min" : 1
-                     })
-                   // $('#Unit' + index).html(data.drug.Unit);
-                    $('#Unit' + index).val(Unit);
-                    //$('#Price' + index).html(data.drug.Price);
-                    $('#Price' + index).val(Price);
-                    let quantity = $('#Quantity' + index).val();
-                    if (quantity=="") quantity=0;
-                    let curTotal = parseInt($("#AllTotal").val());
-                    let oldTotal = parseInt($('#Total' + index).val());
-                    if (oldTotal > 0) curTotal -= oldTotal;
-                    //$('#Total' + index).html(parseInt(data.drug.Price) * parseInt(quantity));
-                    $('#Total' + index).val(parseInt(Price) * parseInt(quantity));
-                    curTotal += parseInt(Price) * parseInt(quantity);
-                    //$('#AllTotal').html(curTotal);
-                    $('#AllTotal').val(curTotal);
+            ok = true;
+            var Unit = options[i].getAttribute("data-unit");
+            var Price = options[i].getAttribute("data-price");
+            var MaxQuantity = options[i].getAttribute("data-quantity");
+            $('#MaxQuantity' + index).val(MaxQuantity);
+            $('#Quantity' + index).attr({
+                "max": MaxQuantity,
+                "min": 1
+            })
+            // $('#Unit' + index).html(data.drug.Unit);
+            $('#Unit' + index).val(Unit);
+            //$('#Price' + index).html(data.drug.Price);
+            $('#Price' + index).val(Price);
+            let quantity = $('#Quantity' + index).val();
+            if (quantity == "") quantity = 0;
+            let curTotal = parseInt($("#AllTotal").val());
+            let oldTotal = parseInt($('#Total' + index).val());
+            if (oldTotal > 0) curTotal -= oldTotal;
+            //$('#Total' + index).html(parseInt(data.drug.Price) * parseInt(quantity));
+            $('#Total' + index).val(parseInt(Price) * parseInt(quantity));
+            curTotal += parseInt(Price) * parseInt(quantity);
+            //$('#AllTotal').html(curTotal);
+            $('#AllTotal').val(curTotal);
             // An item was selected from the list!
             // yourCallbackHere()
             //alert('item selected: ' + val);
@@ -542,12 +522,12 @@ function onInput1(e) {
         }
     }
     if (!ok) {
-        $('#MaxQuantity'+index).val("");
+        $('#MaxQuantity' + index).val("");
         $('#Unit' + index).val("");
         $('#Price' + index).val("");
         let curTotal = parseInt($("#AllTotal").val());
         let oldTotal = parseInt($('#Total' + index).val());
-        curTotal-=oldTotal;
+        curTotal -= oldTotal;
         $('#Total' + index).val("");
         $('#AllTotal').val(curTotal);
     }
@@ -557,19 +537,19 @@ function onInput2(e) {
     console.log('input');
     var input = e.target,
         val = input.value;
-    val=parseInt(val);
-    if (isNaN(val)) val=0;
+    val = parseInt(val);
+    if (isNaN(val)) val = 0;
 
     console.log('index', input.getAttribute("data-index"));
     var index = input.getAttribute("data-index");
     var unitPrice = parseInt($("#Price" + index).val());
     if (isNaN(unitPrice)) {
-        unitPrice=0;
+        unitPrice = 0;
     }
     var allTotal = parseInt($("#AllTotal").val());
-    if (isNaN(allTotal)) allTotal=0;
-    let temp=parseInt($("#Total" + index).val());
-    if (isNaN(temp)) temp=0;
+    if (isNaN(allTotal)) allTotal = 0;
+    let temp = parseInt($("#Total" + index).val());
+    if (isNaN(temp)) temp = 0;
     allTotal -= temp;
     const total = parseInt(val) * parseInt(unitPrice);
     allTotal += total;
@@ -683,7 +663,7 @@ function CalPercent() {
     document.getElementById('total').value = total;
     for (let i = 0; i < list.length; i++) {
         let index = i + 1;
-        let res = ((parseInt(list[i].value) || 0) / (parseInt(total)) * 100)||0;
+        let res = ((parseInt(list[i].value) || 0) / (parseInt(total)) * 100) || 0;
         res = res.toFixed(2);
         $('#tyle-' + index).val(res);
     }

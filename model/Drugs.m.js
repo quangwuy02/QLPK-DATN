@@ -1,24 +1,24 @@
-const {db}=require('../model/Database.m');
+const { db } = require('../model/Database.m');
 module.exports = {
     create: async (data) => {
         await db.collection('Drugs').insertOne(data);
     },
     getAll: async () => {
-        const rs=await db.collection('Drugs').find({}).toArray();
+        const rs = await db.collection('Drugs').find({}).toArray();
         return rs;
     },
-    getByName: async(Name) => {
-        const rs=await db.collection('Drugs').find({Name:Name}).toArray();
+    getByName: async (Name) => {
+        const rs = await db.collection('Drugs').find({ Name: Name }).toArray();
         return rs;
     },
-    getByID: async(ID) => {
-        const rs=await db.collection('Drugs').find({ID:ID}).toArray();
+    getByID: async (ID) => {
+        const rs = await db.collection('Drugs').find({ ID: ID }).toArray();
         return rs;
     },
-    update: async(ID,data) => {
-        await db.collection('Drugs').updateOne({ID:ID},{$set:data},{upsert:true});
+    update: async (ID, data) => {
+        await db.collection('Drugs').updateOne({ ID: ID }, { $set: data }, { upsert: true });
     },
-    delete: async(ID)=>{
-        await db.collection('Drugs').deleteOne({ID:ID});
+    delete: async (ID) => {
+        await db.collection('Drugs').deleteOne({ ID: ID });
     }
 }
