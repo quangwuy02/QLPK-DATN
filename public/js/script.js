@@ -19,6 +19,7 @@ $(function () {
         $.post("/tai-khoan/huy-cuoc-hen", { appointmentId: appointmentId })
             .done(function (response) {
                 $('.successMessage').text(response.message);
+                $('.confirmModal').modal('hide');
                 $('.successModal').modal('show');
             })
             .fail(function (xhr, status, error) {
