@@ -3,6 +3,10 @@ module.exports = {
     create: async (data) => {
         await db.collection('Drugs').insertOne(data);
     },
+    findDrug: async (ID, Name, Unit) => {
+        const rs = await db.collection('Drugs').find({ ID: ID, Name: Name, Unit: Unit }).toArray();
+        return rs;
+    },
     getAll: async () => {
         const rs = await db.collection('Drugs').find({}).toArray();
         return rs;
