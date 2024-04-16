@@ -21,7 +21,7 @@ exports.postAddDrug = async (req, res, next) => {
     let existingDrug = await DrugsM.findDrug({ ID: data.ID, Name: data.Name, Unit: data.Unit });
     //kiểm tra tồn tại thuốc hay chưa???
     if (existingDrug) {
-      return res.render('./pages/error', { display1: "d-block", display2: "d-none", role: role, errorMessage: "Thuốc đã tồn tại." });
+      return res.render('./drug/search-drug', { display1: "d-block", display2: "d-none", role: role, errorMessage: "Thuốc đã tồn tại." });
     } else {
       //tạo mới nếu chưa có
       await DrugsM.create({
