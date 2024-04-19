@@ -228,6 +228,7 @@ $(function () {
             },
             function (data, status) {
                 console.log(data);
+                location.reload();
             });
     })
     $('input[list="patients"]').on('input', onInput);
@@ -312,6 +313,7 @@ $(function () {
         $("#editSchedule").addClass("d-block");
         $("#saveSchedule").removeClass("d-block");
         $("#saveSchedule").addClass("d-none");
+        location.reload();
     });
     $('table').on('click', 'button', function (e) {
         let nRows = parseInt(document.getElementsByTagName("tbody")[0].childElementCount);
