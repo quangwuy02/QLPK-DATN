@@ -97,6 +97,7 @@ $(function () {
         }
     });
     var table = $('#example').DataTable({
+        scrollY: "calc(100vh - 490px)",
         pageLength: 10,
         lengthChange: false,
         buttons: [
